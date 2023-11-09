@@ -282,7 +282,7 @@ typedef MDB_ID	txnid_t;
 	 *	Set this to 1 for copious tracing. Set to 2 to add dumps of all IDLs
 	 *	read from and written to the database (used for free space management).
 	 */
-#define MDB_DEBUG 0
+#define MDB_DEBUG 1
 #endif
 
 #if !(__STDC_VERSION__ >= 199901L || defined(__GNUC__))

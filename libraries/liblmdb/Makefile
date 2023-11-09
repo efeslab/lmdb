@@ -1,6 +1,6 @@
-CC	= gcc
-W	= -W -Wall -Wno-unused-parameter -Wbad-function-cast
-OPT = -O2 -g
+CC	= wllvm
+W	= -w -Wno-unused-parameter -Wbad-function-cast
+OPT = -O0 -g
 CFLAGS	= -pthread $(OPT) $(W) $(XCFLAGS)
 LDLIBS	=
 SOLIBS	=
@@ -10,7 +10,7 @@ IHDRS	= lmdb.h
 ILIBS	= liblmdb.a liblmdb.so
 IPROGS	= mdb_stat mdb_copy
 IDOCS	= mdb_stat.1 mdb_copy.1
-PROGS	= $(IPROGS) mtest mtest2 mtest3 mtest4 mtest5
+PROGS	= $(IPROGS) mtest mtest2 mtest3 mtest4 mtest5 mtest6 mtest_mmap_read mtest_mmap_insert
 all:	$(ILIBS) $(PROGS)
 
 install: $(ILIBS) $(IPROGS) $(IHDRS)
@@ -40,6 +40,8 @@ mtest3:	mtest3.o liblmdb.a
 mtest4:	mtest4.o liblmdb.a
 mtest5:	mtest5.o liblmdb.a
 mtest6:	mtest6.o liblmdb.a
+mtest_mmap_read: mtest_mmap_read.o liblmdb.a
+mtest_mmap_insert: mtest_mmap_insert.o liblmdb.a
 
 mdb.o: mdb.c lmdb.h midl.h
 	$(CC) $(CFLAGS) -fPIC $(CPPFLAGS) -c mdb.c

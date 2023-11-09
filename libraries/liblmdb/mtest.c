@@ -19,6 +19,11 @@
 
 int main(int argc,char * argv[])
 {
+
+	if (argc != 2) {
+        printf("Usage: %s <dir_path> \n", argv[0]);
+        return 1;
+    }
 	int i = 0, j = 0, rc;
 	MDB_env *env;
 	MDB_dbi dbi;
@@ -41,7 +46,7 @@ int main(int argc,char * argv[])
     
 		rc = mdb_env_create(&env);
 		rc = mdb_env_set_mapsize(env, 10485760);
-		rc = mdb_env_open(env, "./testdb", MDB_FIXEDMAP /*|MDB_NOSYNC*/, 0664);
+		rc = mdb_env_open(env, argv[1], MDB_WRITEMAP|MDB_NOSYNC /*|MDB_NOSYNC*/, 0664);
 		rc = mdb_txn_begin(env, NULL, 0, &txn);
 		rc = mdb_open(txn, NULL, 0, &dbi);
    
